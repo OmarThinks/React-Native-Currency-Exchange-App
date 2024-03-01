@@ -12,7 +12,6 @@ const BottomModal = memo(
     setIsVisible: (a: boolean) => void;
     children: React.ReactNode;
   }) => {
-    //const showModal = () => setIsVisible(true);
     const hideModal = () => setIsVisible(false);
     const {height, width} = useWindowDimensions();
     const containerStyle: ViewStyle = {

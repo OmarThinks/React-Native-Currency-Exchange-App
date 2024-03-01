@@ -4,6 +4,7 @@ import {useAppTheme} from '@theme';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Text, View} from 'react-native';
+import {RadioButton} from 'react-native-paper';
 
 const HR = ({height = 2}: {height?: number}) => {
   return (
@@ -34,6 +35,7 @@ const Header = ({title = 'Title'}: {title: string}) => {
 
 const Components2 = () => {
   const [isBottomModalVisible, setIsBottomModalVisible] = useState(false);
+  const [value, setValue] = React.useState('first');
 
   return (
     <View>
@@ -51,6 +53,11 @@ const Components2 = () => {
         setIsVisible={setIsBottomModalVisible}>
         <Text>Hi</Text>
       </BottomModal>
+
+      <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
+        <RadioButton.Item label="First item" value="first" />
+        <RadioButton.Item label="Second item" value="second" />
+      </RadioButton.Group>
     </View>
   );
 };
