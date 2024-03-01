@@ -7,15 +7,21 @@ import {View, ViewStyle, useWindowDimensions} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import {Text} from 'react-native-paper';
 
+enum CURRENCY {
+  USD = 'USD',
+  EGP = 'EGP',
+  EUR = 'EUR',
+}
+
 const Home = () => {
   const {t} = useTranslation();
   // console.log(i18n.language);
 
-  const currencyNames = useMemo(() => {
+  const currencyNames: Record<CURRENCY, string> = useMemo(() => {
     return {
-      USD: t('currency.usd') as string,
-      EUR: t('currency.eur') as string,
-      EGP: t('currency.egp') as string,
+      [CURRENCY.USD]: t('currency.usd') as string,
+      [CURRENCY.EUR]: t('currency.eur') as string,
+      [CURRENCY.EGP]: t('currency.egp') as string,
     };
   }, [t]);
 
@@ -43,6 +49,9 @@ const Home = () => {
 
   const colors = useAppTheme().colors;
 
+  const [fromSelection, setFromSelection] = useState<CURRENCY>(CURRENCY.USD);
+  const [toSelection, setToSelection] = useState<CURRENCY>(CURRENCY.EGP);
+
   return (
     <View className="self-stretch items-stretch">
       <Chart />
@@ -52,14 +61,18 @@ const Home = () => {
           onPress={() => {
             setIsFromModalVisible(true);
           }}>
-          <Text style={{color: colors.normalText}}>USD</Text>
+          <Text style={{color: colors.normalText}}>
+            {currencyNames[fromSelection]}
+          </Text>
         </SwitchActionButton>
         <SwitchActionButton
           style={{flex: 1}}
           onPress={() => {
             setIsToModalVisible(true);
           }}>
-          <Text style={{color: colors.normalText}}>USD</Text>
+          <Text style={{color: colors.normalText}}>
+            {currencyNames[toSelection]}
+          </Text>
         </SwitchActionButton>
       </View>
 
