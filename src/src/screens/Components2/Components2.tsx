@@ -48,8 +48,9 @@ const Components2 = () => {
       </View>
       <BottomModal
         isVisible={isBottomModalVisible}
-        setIsVisible={setIsBottomModalVisible}
-      />
+        setIsVisible={setIsBottomModalVisible}>
+        <Text>Hi</Text>
+      </BottomModal>
     </View>
   );
 };

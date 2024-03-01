@@ -1,15 +1,16 @@
-import {View, Text, ViewStyle, ScrollView} from 'react-native';
 import React, {memo} from 'react';
-import {Modal, Portal, Button, PaperProvider} from 'react-native-paper';
-import {useWindowDimensions} from 'react-native';
+import {ScrollView, View, ViewStyle, useWindowDimensions} from 'react-native';
+import {Modal, Portal} from 'react-native-paper';
 
 const BottomModal = memo(
   ({
     isVisible,
     setIsVisible,
+    children,
   }: {
     isVisible: boolean;
     setIsVisible: (a: boolean) => void;
+    children: React.ReactNode;
   }) => {
     //const showModal = () => setIsVisible(true);
     const hideModal = () => setIsVisible(false);
@@ -22,6 +23,9 @@ const BottomModal = memo(
       bottom: 0,
       width,
       right: 0,
+      overflow: 'hidden',
+      borderTopLeftRadius: 30,
+      borderTopRightRadius: 30,
     };
 
     return (
@@ -36,46 +40,8 @@ const BottomModal = memo(
               alignSelf: 'stretch',
               alignItems: 'stretch',
             }}>
-            <View className="self-stretch items-stretch bg-slate-400">
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
-              <Text className="m-5">
-                Example Modal. Click outside this area to dismiss.
-              </Text>
+            <View className="self-stretch items-stretch mx-4 my-4">
+              {children}
             </View>
           </ScrollView>
         </Modal>
