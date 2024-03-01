@@ -1,4 +1,4 @@
-import {BottomModal, TouchFiller, RadioButtonOptions} from '@components';
+import {BottomModal, RadioButtonOptions, TouchFiller} from '@components';
 import {MainLayout} from '@hoc';
 import {useAppTheme} from '@theme';
 import React, {useState} from 'react';
