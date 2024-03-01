@@ -117,6 +117,18 @@ const AppBar = ({
                   setModalVisible={setModalVisible}
                 />
               )}
+              {__DEV__ && (
+                <DrawerItem
+                  onPress={() => {
+                    try {
+                      navigation.navigate(navigationNames.Components2);
+                    } catch (error) {}
+                  }}
+                  iconName={'sitemap'}
+                  title={t('screen.components2')}
+                  setModalVisible={setModalVisible}
+                />
+              )}
               <DrawerItem
                 onPress={() => {
                   try {

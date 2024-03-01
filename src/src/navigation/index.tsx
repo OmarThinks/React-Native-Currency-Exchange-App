@@ -1,4 +1,4 @@
-import { RootStack, navigationNames } from './RootStack';
-export type { RootStackParamList, NavigationNameType } from './RootStack';
+import {RootStack, navigationNames} from './RootStack';
+export type {RootStackParamList, NavigationNameType} from './RootStack';
 
-export { navigationNames, RootStack };
+export {navigationNames, RootStack};
