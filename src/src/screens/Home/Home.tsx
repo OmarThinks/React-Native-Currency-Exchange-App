@@ -1,8 +1,8 @@
-import {TouchFiller, BottomModal, RadioButtonOptions} from '@components';
+import {BottomModal, Icon, RadioButtonOptions, TouchFiller} from '@components';
 import {MainLayout} from '@hoc';
 import {useAppTheme} from '@theme';
 import React, {memo, useCallback, useMemo, useState} from 'react';
-import {useSSR, useTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {View, ViewStyle, useWindowDimensions} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import {Text} from 'react-native-paper';
@@ -29,6 +29,13 @@ const Home = () => {
   const [isFromModalVisible, setIsFromModalVisible] = useState(false);
   const [isToModalVisible, setIsToModalVisible] = useState(false);
 
+  const reverse = useCallback(() => {
+    const _fromSelection = fromSelection;
+    const _toSelection = toSelection;
+    setFromSelection(_toSelection);
+    setToSelection(_fromSelection);
+  }, [fromSelection, toSelection, setFromSelection, setToSelection]);
+
   const currencyChoices = useMemo(() => {
     return Object.keys(currencyNames).map(currency => {
       const _currency = currency as CURRENCY;
@@ -44,7 +51,11 @@ const Home = () => {
         <RadioButtonOptions
           value={fromSelection}
           setValue={newValue => {
-            setFromSelection(newValue as CURRENCY);
+            if (newValue === toSelection) {
+              reverse();
+            } else {
+              setFromSelection(newValue as CURRENCY);
+            }
             setIsFromModalVisible(false);
           }}
           labels={currencyChoices}
@@ -57,6 +68,8 @@ const Home = () => {
     fromSelection,
     setFromSelection,
     currencyChoices,
+    toSelection,
+    reverse,
   ]);
   const toCurrencyModal = useMemo(() => {
     return (
@@ -66,7 +79,11 @@ const Home = () => {
         <RadioButtonOptions
           value={toSelection}
           setValue={newValue => {
-            setToSelection(newValue as CURRENCY);
+            if (newValue === fromSelection) {
+              reverse();
+            } else {
+              setToSelection(newValue as CURRENCY);
+            }
             setIsToModalVisible(false);
           }}
           labels={currencyChoices}
@@ -79,6 +96,8 @@ const Home = () => {
     setToSelection,
     setIsToModalVisible,
     currencyChoices,
+    fromSelection,
+    reverse,
   ]);
 
   const colors = useAppTheme().colors;
@@ -98,16 +117,19 @@ const Home = () => {
           onPress={() => {
             setIsFromModalVisible(true);
           }}>
-          <Text style={{color: colors.normalText}}>
+          <Text style={{color: colors.normalText}} className="font-bold">
             {currencyNames[fromSelection]}
           </Text>
+        </SwitchActionButton>
+        <SwitchActionButton style={{width: 48}} onPress={reverse}>
+          <Icon size={20} color={colors.normalText} name="random" />
         </SwitchActionButton>
         <SwitchActionButton
           style={{flex: 1}}
           onPress={() => {
             setIsToModalVisible(true);
           }}>
-          <Text style={{color: colors.normalText}}>
+          <Text style={{color: colors.normalText}} className="font-bold">
             {currencyNames[toSelection]}
           </Text>
         </SwitchActionButton>
