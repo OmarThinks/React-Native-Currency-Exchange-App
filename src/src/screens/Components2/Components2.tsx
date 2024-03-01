@@ -1,9 +1,9 @@
+import {BottomModal, TouchFiller} from '@components';
 import {MainLayout} from '@hoc';
-import React from 'react';
+import {useAppTheme} from '@theme';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Text, View} from 'react-native';
-import {BottomModal} from '@components';
-import {useAppTheme} from '@theme';
 
 const HR = ({height = 2}: {height?: number}) => {
   return (
@@ -33,10 +33,23 @@ const Header = ({title = 'Title'}: {title: string}) => {
 };
 
 const Components2 = () => {
+  const [isBottomModalVisible, setIsBottomModalVisible] = useState(false);
+
   return (
     <View>
       <Header title="Text" />
-      <BottomModal />
+      <View>
+        <TouchFiller
+          onPress={() => {
+            setIsBottomModalVisible(true);
+          }}
+        />
+        <Text>Display Bottom Modal</Text>
+      </View>
+      <BottomModal
+        isVisible={isBottomModalVisible}
+        setIsVisible={setIsBottomModalVisible}
+      />
     </View>
   );
 };
