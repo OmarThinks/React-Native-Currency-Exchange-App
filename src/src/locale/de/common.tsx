@@ -17,6 +17,10 @@ const common: typeof enCommon = {
   'month.october': 'Oktober',
   'month.november': 'November',
   'month.december': 'Dezember',
+
+  'currency.usd': 'US-Dollar',
+  'currency.eur': 'Euro',
+  'currency.egp': 'Ägyptisches Pfund',
 };
 
 export default common;

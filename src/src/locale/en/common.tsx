@@ -15,6 +15,10 @@ const common = {
   'month.october': 'October',
   'month.november': 'November',
   'month.december': 'December',
+
+  'currency.usd': 'United States Dollar',
+  'currency.eur': 'Euro',
+  'currency.egp': 'Egyptian Pound',
 };
 
 export default common;
