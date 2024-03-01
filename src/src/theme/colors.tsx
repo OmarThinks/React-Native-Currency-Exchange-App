@@ -13,6 +13,9 @@ const lightColors = {
   _onSurface: 'black',
   radioButtonChecked: 'green',
   radioButtonUnChecked: 'red',
+
+  // Chart:
+  chartBgColor: '#eee',
 };
 
 type themeColors = typeof lightColors;
@@ -27,6 +30,9 @@ const darkColors: themeColors = {
   _onSurface: 'white',
   radioButtonChecked: 'lime',
   radioButtonUnChecked: 'pink',
+
+  // Chart:
+  chartBgColor: '#222',
 };
 
 export {darkColors, lightColors};
