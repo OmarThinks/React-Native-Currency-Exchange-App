@@ -1,4 +1,4 @@
-import {TouchFiller, BottomModal} from '@components';
+import {TouchFiller, BottomModal, RadioButtonOptions} from '@components';
 import {MainLayout} from '@hoc';
 import {useAppTheme} from '@theme';
 import React, {memo, useCallback, useMemo, useState} from 'react';
@@ -17,26 +17,47 @@ const Home = () => {
   const {t} = useTranslation();
   // console.log(i18n.language);
 
-  const currencyNames: Record<CURRENCY, string> = useMemo(() => {
+  const currencyNames: {[index in CURRENCY]: string} = useMemo(() => {
     return {
       [CURRENCY.USD]: t('currency.usd') as string,
       [CURRENCY.EUR]: t('currency.eur') as string,
       [CURRENCY.EGP]: t('currency.egp') as string,
     };
   }, [t]);
-
+  const [fromSelection, setFromSelection] = useState<CURRENCY>(CURRENCY.USD);
+  const [toSelection, setToSelection] = useState<CURRENCY>(CURRENCY.EGP);
   const [isFromModalVisible, setIsFromModalVisible] = useState(false);
   const [isToModalVisible, setIsToModalVisible] = useState(false);
+
+  const fromChoices = useMemo(() => {
+    return Object.keys(currencyNames).map(currency => {
+      const _currency = currency as CURRENCY;
+      return {label: currencyNames[_currency], value: _currency};
+    });
+  }, [currencyNames]);
 
   const fromCurrencyModal = useMemo(() => {
     return (
       <BottomModal
         isVisible={isFromModalVisible}
         setIsVisible={setIsFromModalVisible}>
-        <Text>Hi</Text>
+        <RadioButtonOptions
+          value={fromSelection}
+          setValue={newValue => {
+            setFromSelection(newValue as CURRENCY);
+            setIsFromModalVisible(false);
+          }}
+          labels={fromChoices}
+        />
       </BottomModal>
     );
-  }, [isFromModalVisible, setIsFromModalVisible]);
+  }, [
+    isFromModalVisible,
+    setIsFromModalVisible,
+    fromSelection,
+    setFromSelection,
+    fromChoices,
+  ]);
   const toCurrencyModal = useMemo(() => {
     return (
       <BottomModal
@@ -49,8 +70,11 @@ const Home = () => {
 
   const colors = useAppTheme().colors;
 
-  const [fromSelection, setFromSelection] = useState<CURRENCY>(CURRENCY.USD);
-  const [toSelection, setToSelection] = useState<CURRENCY>(CURRENCY.EGP);
+  /*const fromChoices: Record<string, Currency>[] = useMemo((
+    ()=>{return currencyNames.map(
+      (name, index) => ({}))}
+  ) => {}, []);
+  */
 
   return (
     <View className="self-stretch items-stretch">
