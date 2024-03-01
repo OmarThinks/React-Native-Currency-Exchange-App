@@ -29,7 +29,7 @@ const Home = () => {
   const [isFromModalVisible, setIsFromModalVisible] = useState(false);
   const [isToModalVisible, setIsToModalVisible] = useState(false);
 
-  const fromChoices = useMemo(() => {
+  const currencyChoices = useMemo(() => {
     return Object.keys(currencyNames).map(currency => {
       const _currency = currency as CURRENCY;
       return {label: currencyNames[_currency], value: _currency};
@@ -47,7 +47,7 @@ const Home = () => {
             setFromSelection(newValue as CURRENCY);
             setIsFromModalVisible(false);
           }}
-          labels={fromChoices}
+          labels={currencyChoices}
         />
       </BottomModal>
     );
@@ -56,17 +56,30 @@ const Home = () => {
     setIsFromModalVisible,
     fromSelection,
     setFromSelection,
-    fromChoices,
+    currencyChoices,
   ]);
   const toCurrencyModal = useMemo(() => {
     return (
       <BottomModal
         isVisible={isToModalVisible}
         setIsVisible={setIsToModalVisible}>
-        <Text>Hi</Text>
+        <RadioButtonOptions
+          value={toSelection}
+          setValue={newValue => {
+            setToSelection(newValue as CURRENCY);
+            setIsToModalVisible(false);
+          }}
+          labels={currencyChoices}
+        />
       </BottomModal>
     );
-  }, [isToModalVisible, setIsToModalVisible]);
+  }, [
+    isToModalVisible,
+    toSelection,
+    setToSelection,
+    setIsToModalVisible,
+    currencyChoices,
+  ]);
 
   const colors = useAppTheme().colors;
 
