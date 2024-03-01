@@ -12,11 +12,15 @@ const Home = () => {
   const colors = useAppTheme().colors;
 
   return (
-    <View>
+    <View className="self-stretch items-stretch">
       <Chart />
+
+      <View className="flex-row self-stretch" style={{gap: 15}}></View>
     </View>
   );
 };
+
+const SwitchActionButton = memo(() => {});
 
 const Chart = memo(() => {
   const {width} = useWindowDimensions();
