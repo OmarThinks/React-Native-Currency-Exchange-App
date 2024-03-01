@@ -1,8 +1,8 @@
-import {TouchFiller} from '@components';
+import {TouchFiller, BottomModal} from '@components';
 import {MainLayout} from '@hoc';
 import {useAppTheme} from '@theme';
-import React, {memo, useCallback, useMemo} from 'react';
-import {useTranslation} from 'react-i18next';
+import React, {memo, useCallback, useMemo, useState} from 'react';
+import {useSSR, useTranslation} from 'react-i18next';
 import {View, ViewStyle, useWindowDimensions} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import {Text} from 'react-native-paper';
@@ -19,16 +19,46 @@ const Home = () => {
     };
   }, [t]);
 
+  const [isFromModalVisible, setIsFromModalVisible] = useState(false);
+  const [isToModalVisible, setIsToModalVisible] = useState(false);
+
+  const fromCurrencyModal = useMemo(() => {
+    return (
+      <BottomModal
+        isVisible={isFromModalVisible}
+        setIsVisible={setIsFromModalVisible}>
+        <Text>Hi</Text>
+      </BottomModal>
+    );
+  }, [isFromModalVisible, setIsFromModalVisible]);
+  const toCurrencyModal = useMemo(() => {
+    return (
+      <BottomModal
+        isVisible={isToModalVisible}
+        setIsVisible={setIsToModalVisible}>
+        <Text>Hi</Text>
+      </BottomModal>
+    );
+  }, [isToModalVisible, setIsToModalVisible]);
+
   const colors = useAppTheme().colors;
 
   return (
     <View className="self-stretch items-stretch">
       <Chart />
       <View className="flex-row self-stretch" style={{gap: 15}}>
-        <SwitchActionButton style={{flex: 1}} onPress={() => {}}>
+        <SwitchActionButton
+          style={{flex: 1}}
+          onPress={() => {
+            setIsFromModalVisible(true);
+          }}>
           <Text style={{color: colors.normalText}}>USD</Text>
         </SwitchActionButton>
-        <SwitchActionButton style={{flex: 1}} onPress={() => {}}>
+        <SwitchActionButton
+          style={{flex: 1}}
+          onPress={() => {
+            setIsToModalVisible(true);
+          }}>
           <Text style={{color: colors.normalText}}>USD</Text>
         </SwitchActionButton>
       </View>
@@ -38,6 +68,9 @@ const Home = () => {
         <Text>{currencyNames.EGP}</Text>
         <Text>{currencyNames.EUR}</Text>
       </View>
+
+      {fromCurrencyModal}
+      {toCurrencyModal}
     </View>
   );
 };
