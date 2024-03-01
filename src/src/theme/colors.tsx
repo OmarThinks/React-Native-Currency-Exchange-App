@@ -11,6 +11,8 @@ const lightColors = {
   normalText: '#000000',
   _surface: 'lightgreen',
   _onSurface: 'black',
+  radioButtonChecked: 'green',
+  radioButtonUnChecked: 'red',
 };
 
 type themeColors = typeof lightColors;
@@ -23,6 +25,8 @@ const darkColors: themeColors = {
   normalText: '#ffffff',
   _surface: 'green',
   _onSurface: 'white',
+  radioButtonChecked: 'lime',
+  radioButtonUnChecked: 'pink',
 };
 
 export {darkColors, lightColors};

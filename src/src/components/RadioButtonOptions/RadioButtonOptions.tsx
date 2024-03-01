@@ -1,6 +1,6 @@
-import {View, Text} from 'react-native';
 import React, {memo, useMemo} from 'react';
 import {RadioButton} from 'react-native-paper';
+import {useAppTheme} from '@theme';
 
 type LabelType = {
   label: string;
@@ -19,6 +19,8 @@ const RadioButtonOptions = memo(
     value: string;
     setValue: (a: string) => void;
   }) => {
+    const colors = useAppTheme().colors;
+
     const toRender = useMemo(
       () =>
         labels.map(label => (
@@ -26,13 +28,17 @@ const RadioButtonOptions = memo(
             label={label.label}
             value={label.value}
             key={label.value}
+            color={colors.radioButtonChecked}
+            //uncheckedColor={colors.radioButtonUnChecked}
           />
         )),
-      [labels],
+      [labels, colors],
     );
 
     return (
-      <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
+      <RadioButton.Group
+        onValueChange={newValue => setValue(newValue)}
+        value={value}>
         {toRender}
       </RadioButton.Group>
     );

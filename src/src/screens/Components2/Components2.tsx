@@ -3,7 +3,8 @@ import {MainLayout} from '@hoc';
 import {useAppTheme} from '@theme';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
+import {Text} from 'react-native-paper';
 
 const HR = ({height = 2}: {height?: number}) => {
   return (
