@@ -1,26 +1,68 @@
+import {TouchFiller} from '@components';
 import {MainLayout} from '@hoc';
 import {useAppTheme} from '@theme';
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
-import {View, useWindowDimensions} from 'react-native';
+import {View, ViewStyle, useWindowDimensions} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
+import {Text} from 'react-native-paper';
 
 const Home = () => {
   const {t} = useTranslation();
   // console.log(i18n.language);
+
+  const currencyNames = useMemo(() => {
+    return {
+      USD: t('currency.usd') as string,
+      EUR: t('currency.eur') as string,
+      EGP: t('currency.egp') as string,
+    };
+  }, [t]);
 
   const colors = useAppTheme().colors;
 
   return (
     <View className="self-stretch items-stretch">
       <Chart />
+      <View className="flex-row self-stretch" style={{gap: 15}}>
+        <SwitchActionButton style={{flex: 1}} onPress={() => {}}>
+          <Text style={{color: colors.normalText}}>USD</Text>
+        </SwitchActionButton>
+        <SwitchActionButton style={{flex: 1}} onPress={() => {}}>
+          <Text style={{color: colors.normalText}}>USD</Text>
+        </SwitchActionButton>
+      </View>
 
-      <View className="flex-row self-stretch" style={{gap: 15}}></View>
+      <View className="flex-row self-stretch flex-wrap" style={{gap: 15}}>
+        <Text>{currencyNames.USD}</Text>
+        <Text>{currencyNames.EGP}</Text>
+        <Text>{currencyNames.EUR}</Text>
+      </View>
     </View>
   );
 };
 
-const SwitchActionButton = memo(() => {});
+const SwitchActionButton = memo(
+  ({
+    children,
+    style,
+    onPress,
+  }: {
+    children: React.ReactNode;
+    style?: ViewStyle;
+    onPress?: () => void;
+  }) => {
+    const colors = useAppTheme().colors;
+    return (
+      <View
+        className="overflow-hidden rounded-[15px] h-12 items-center justify-center border-[2px]"
+        style={[style, {borderColor: colors.normalText}]}>
+        <TouchFiller onPress={onPress} />
+        {children}
+      </View>
+    );
+  },
+);
 
 const Chart = memo(() => {
   const {width} = useWindowDimensions();
