@@ -19,6 +19,13 @@ const common = {
   'currency.usd': 'United States Dollar',
   'currency.eur': 'Euro',
   'currency.egp': 'Egyptian Pound',
+
+  'duration.day': '1 Day',
+  'duration.week': '1 Week',
+  'duration.month': '1 Month',
+  'duration.threeMonths': '3 Months',
+  'duration.year': '1 Year',
+  'duration.fiveYears': '5 Years',
 };
 
 export default common;

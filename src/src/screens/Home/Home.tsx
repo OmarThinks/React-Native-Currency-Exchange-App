@@ -17,6 +17,14 @@ enum CURRENCY {
   EGP = 'EGP',
   EUR = 'EUR',
 }
+enum DURATION {
+  DAY = 'DAY',
+  WEEK = 'WEEK',
+  MONTH = 'MONTH',
+  THREEMONTHS = 'THREEMONTHS',
+  YEAR = 'YEAR',
+  FIVEYEARS = 'FIVEYEARS',
+}
 
 const Home = () => {
   const {t} = useTranslation();

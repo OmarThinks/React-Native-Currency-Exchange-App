@@ -21,6 +21,13 @@ const common: typeof enCommon = {
   'currency.usd': 'دولار أمريكي',
   'currency.eur': 'يورو',
   'currency.egp': 'جنيه مصري',
+
+  'duration.day': 'يوم',
+  'duration.week': 'أسبوع',
+  'duration.month': 'شهر',
+  'duration.threeMonths': 'ثلاثة أشهر',
+  'duration.year': 'عام',
+  'duration.fiveYears': 'خمسة أعوام',
 };
 
 export default common;
