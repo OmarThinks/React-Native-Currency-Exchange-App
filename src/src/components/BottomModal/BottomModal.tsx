@@ -1,3 +1,4 @@
+import {useAppTheme} from '@theme';
 import React, {memo} from 'react';
 import {ScrollView, View, ViewStyle, useWindowDimensions} from 'react-native';
 import {Modal, Portal} from 'react-native-paper';
@@ -14,8 +15,10 @@ const BottomModal = memo(
   }) => {
     const hideModal = () => setIsVisible(false);
     const {height, width} = useWindowDimensions();
+    const colors = useAppTheme().colors;
+
     const containerStyle: ViewStyle = {
-      backgroundColor: 'white',
+      backgroundColor: colors.appBg,
       //padding: 20,
       maxHeight: height * 0.8,
       position: 'absolute',
