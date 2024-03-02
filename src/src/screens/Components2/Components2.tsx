@@ -1,4 +1,9 @@
-import {BottomModal, RadioButtonOptions, TouchFiller} from '@components';
+import {
+  BottomModal,
+  RadioButtonOptions,
+  TouchFiller,
+  SwitchActionButton,
+} from '@components';
 import {MainLayout} from '@hoc';
 import {useAppTheme} from '@theme';
 import React, {useState} from 'react';
@@ -39,7 +44,7 @@ const Components2 = () => {
 
   return (
     <View>
-      <Header title="Text" />
+      <Header title="BottomModal" />
       <View>
         <TouchFiller
           onPress={() => {
@@ -53,7 +58,9 @@ const Components2 = () => {
         setIsVisible={setIsBottomModalVisible}>
         <Text>Hi</Text>
       </BottomModal>
+      <HR />
 
+      <Header title="RadioButtonOptions" />
       <RadioButtonOptions
         value={value}
         setValue={setValue}
@@ -72,6 +79,13 @@ const Components2 = () => {
           },
         ]}
       />
+      <HR />
+
+      <Header title="RadioButtonOptions" />
+      <SwitchActionButton onPress={() => {}}>
+        <Text>Hey</Text>
+      </SwitchActionButton>
+      <HR />
     </View>
   );
 };
