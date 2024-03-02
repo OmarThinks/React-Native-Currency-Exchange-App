@@ -3,7 +3,7 @@ import React, {memo, useCallback} from 'react';
 import {useWindowDimensions} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 
-const Chart = memo(() => {
+const Chart = memo(({data}: {data: number[]}) => {
   const {width} = useWindowDimensions();
 
   const theme = useAppTheme();
@@ -32,14 +32,7 @@ const Chart = memo(() => {
         labels: ['January', 'February', 'March', 'April', 'May', 'June'],
         datasets: [
           {
-            data: [
-              Math.random() * 100,
-              Math.random() * 100,
-              Math.random() * 100,
-              Math.random() * 100,
-              Math.random() * 100,
-              Math.random() * 100,
-            ],
+            data,
           },
         ],
       }}

@@ -48,6 +48,26 @@ const Home = () => {
     });
   }, [currencyNames]);
 
+  const [data, setData] = useState([
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+  ]);
+
+  const resetData = useCallback(() => {
+    setData([
+      Math.random() * 100,
+      Math.random() * 100,
+      Math.random() * 100,
+      Math.random() * 100,
+      Math.random() * 100,
+      Math.random() * 100,
+    ]);
+  }, [setData]);
+
   const fromCurrencyModal = useMemo(() => {
     return (
       <BottomModal
@@ -62,6 +82,7 @@ const Home = () => {
               setFromSelection(newValue as CURRENCY);
             }
             setIsFromModalVisible(false);
+            resetData();
           }}
           labels={currencyChoices}
         />
@@ -75,6 +96,7 @@ const Home = () => {
     currencyChoices,
     toSelection,
     reverse,
+    resetData,
   ]);
   const toCurrencyModal = useMemo(() => {
     return (
@@ -90,6 +112,7 @@ const Home = () => {
               setToSelection(newValue as CURRENCY);
             }
             setIsToModalVisible(false);
+            resetData();
           }}
           labels={currencyChoices}
         />
@@ -103,29 +126,30 @@ const Home = () => {
     currencyChoices,
     fromSelection,
     reverse,
+    resetData,
   ]);
 
   const colors = useAppTheme().colors;
 
   const [refreshing, setRefreshing] = React.useState(false);
+
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     //wait(2000).then(() => setRefreshing(false));
-    setTimeout(() => setRefreshing(false), 1000);
-  }, []);
+    setTimeout(() => {
+      setRefreshing(false);
+      resetData();
+    }, 1000);
+  }, [resetData, setRefreshing]);
 
   return (
     <ScrollView
       className="self-stretch"
       contentContainerStyle={{alignSelf: 'stretch', alignItems: 'stretch'}}
       refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-          //enabled={enablePTR}
-        />
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
-      <Chart />
+      <Chart data={data} />
       <View className="flex-row self-stretch" style={{gap: 15}}>
         <SwitchActionButton
           style={{flex: 1}}
@@ -136,7 +160,12 @@ const Home = () => {
             {currencyNames[fromSelection]}
           </Text>
         </SwitchActionButton>
-        <SwitchActionButton style={{width: 48}} onPress={reverse}>
+        <SwitchActionButton
+          style={{width: 48}}
+          onPress={() => {
+            reverse();
+            resetData();
+          }}>
           <Icon size={20} color={colors.normalText} name="random" />
         </SwitchActionButton>
         <SwitchActionButton
