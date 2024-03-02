@@ -17,6 +17,7 @@ enum CURRENCY {
   EGP = 'EGP',
   EUR = 'EUR',
 }
+
 enum DURATION {
   DAY = 'DAY',
   WEEK = 'WEEK',
@@ -30,6 +31,17 @@ const Home = () => {
   const {t} = useTranslation();
   // console.log(i18n.language);
 
+  const durationNames: {[index in DURATION]: string} = useMemo(() => {
+    return {
+      [DURATION.DAY]: t('duration.day') as string,
+      [DURATION.WEEK]: t('duration.week') as string,
+      [DURATION.MONTH]: t('duration.month') as string,
+      [DURATION.THREEMONTHS]: t('duration.threeMonths') as string,
+      [DURATION.YEAR]: t('duration.year') as string,
+      [DURATION.FIVEYEARS]: t('duration.fiveYears') as string,
+    };
+  }, [t]);
+
   const currencyNames: {[index in CURRENCY]: string} = useMemo(() => {
     return {
       [CURRENCY.USD]: t('currency.usd') as string,
@@ -39,8 +51,12 @@ const Home = () => {
   }, [t]);
   const [fromSelection, setFromSelection] = useState<CURRENCY>(CURRENCY.USD);
   const [toSelection, setToSelection] = useState<CURRENCY>(CURRENCY.EGP);
+  const [durationSelection, setDurationSelection] = useState<DURATION>(
+    DURATION.MONTH,
+  );
   const [isFromModalVisible, setIsFromModalVisible] = useState(false);
   const [isToModalVisible, setIsToModalVisible] = useState(false);
+  const [isDurationModalVisible, setIsDurationModalVisible] = useState(false);
 
   const reverse = useCallback(() => {
     const _fromSelection = fromSelection;
@@ -137,6 +153,34 @@ const Home = () => {
     resetData,
   ]);
 
+  const durationModal = useMemo(() => {
+    return (
+      <BottomModal
+        isVisible={isDurationModalVisible}
+        setIsVisible={setIsDurationModalVisible}>
+        <RadioButtonOptions
+          value={durationSelection}
+          setValue={newValue => {
+            setDurationSelection(newValue as DURATION);
+            setIsDurationModalVisible(false);
+            resetData();
+          }}
+          labels={Object.keys(durationNames).map(duration => {
+            const _duration = duration as DURATION;
+            return {label: durationNames[_duration], value: _duration};
+          })}
+        />
+      </BottomModal>
+    );
+  }, [
+    isDurationModalVisible,
+    setIsDurationModalVisible,
+    durationSelection,
+    setDurationSelection,
+    resetData,
+    durationNames,
+  ]);
+
   const colors = useAppTheme().colors;
 
   const [refreshing, setRefreshing] = React.useState(false);
@@ -153,7 +197,11 @@ const Home = () => {
   return (
     <ScrollView
       className="self-stretch"
-      contentContainerStyle={{alignSelf: 'stretch', alignItems: 'stretch'}}
+      contentContainerStyle={{
+        alignSelf: 'stretch',
+        alignItems: 'stretch',
+        gap: 20,
+      }}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
@@ -187,8 +235,19 @@ const Home = () => {
         </SwitchActionButton>
       </View>
 
+      <SwitchActionButton
+        style={{alignSelf: 'stretch'}}
+        onPress={() => {
+          setIsDurationModalVisible(true);
+        }}>
+        <Text style={{color: colors.normalText}} className="font-bold">
+          {durationNames[durationSelection]}
+        </Text>
+      </SwitchActionButton>
+
       {fromCurrencyModal}
       {toCurrencyModal}
+      {durationModal}
     </ScrollView>
   );
 };
