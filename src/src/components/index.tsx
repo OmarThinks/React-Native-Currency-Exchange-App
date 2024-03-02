@@ -5,6 +5,7 @@ import CircleIcon from './CircleIcon/CircleIcon';
 import FromSwitchTo from './FromSwitchTo/FromSwitchTo';
 import Icon from './Icon/Icon';
 import RadioButtonOptions from './RadioButtonOptions/RadioButtonOptions';
+import SwitchActionButton from './SwitchActionButton/SwitchActionButton';
 import Text from './Text/Text';
 import TouchFiller from './TouchFiller/TouchFiller';
 
@@ -16,6 +17,7 @@ export {
   FromSwitchTo,
   Icon,
   RadioButtonOptions,
+  SwitchActionButton,
   Text,
   TouchFiller,
 };
