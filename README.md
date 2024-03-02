@@ -19,11 +19,33 @@ A project for currency exchange using React Native
 </tr>
 </table>
 
-# B) About:
+# B) Features:
+
+### 1) Selecting currencies:
+
+<img src="media/01.png" width=400>
+<img src="media/02.png" width=400>
+
+### 2) Selecting Duration:
+
+<img src="media/03.png" width=400>
+
+### 3) Theming:
+
+<img src="media/04.png" width=400>
+<img src="media/05.png" width=400>
+<img src="media/06.png" width=400>
+
+### 4) Multi-Languages support:
+
+<img src="media/07.png" width=400>
+<img src="media/08.png" width=400>
+
+# C) About:
 
 This is the frontend for an app that displays currency exchange prices.
 
-# C) Technologies Used:
+# D) Technologies Used:
 
 1. React
 2. React Native CLI
@@ -34,16 +56,6 @@ This is the frontend for an app that displays currency exchange prices.
 7. TypeScript
 8. Module Resolver
 9. react-i18next
-
-# D) Features:
-
-### 1) Selecting currencies:
-
-### 2) Selecting Duration:
-
-### 3) Theming:
-
-### 4) Multi-Languages support:
 
 # E) Limitation:
 
