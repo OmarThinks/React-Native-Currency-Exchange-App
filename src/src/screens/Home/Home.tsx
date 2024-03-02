@@ -9,7 +9,7 @@ import {MainLayout} from '@hoc';
 import {useAppTheme} from '@theme';
 import React, {useCallback, useMemo, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {View} from 'react-native';
+import {RefreshControl, ScrollView, View} from 'react-native';
 import {Text} from 'react-native-paper';
 
 enum CURRENCY {
@@ -107,8 +107,24 @@ const Home = () => {
 
   const colors = useAppTheme().colors;
 
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    //wait(2000).then(() => setRefreshing(false));
+    setTimeout(() => setRefreshing(false), 1000);
+  }, []);
+
   return (
-    <View className="self-stretch items-stretch">
+    <ScrollView
+      className="self-stretch"
+      contentContainerStyle={{alignSelf: 'stretch', alignItems: 'stretch'}}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          //enabled={enablePTR}
+        />
+      }>
       <Chart />
       <View className="flex-row self-stretch" style={{gap: 15}}>
         <SwitchActionButton
@@ -136,7 +152,7 @@ const Home = () => {
 
       {fromCurrencyModal}
       {toCurrencyModal}
-    </View>
+    </ScrollView>
   );
 };
 

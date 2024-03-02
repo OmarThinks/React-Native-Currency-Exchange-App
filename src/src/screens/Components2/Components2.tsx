@@ -96,5 +96,6 @@ export default () => {
   return MainLayout(Components2, {
     title: t('screen.components2'),
     hasBackButton: true,
+    isScrollable: false,
   });
 };
