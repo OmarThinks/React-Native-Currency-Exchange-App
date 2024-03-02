@@ -81,7 +81,7 @@ const Components2 = () => {
       />
       <HR />
 
-      <Header title="RadioButtonOptions" />
+      <Header title="SwitchActionButton" />
       <SwitchActionButton onPress={() => {}}>
         <Text>Hey</Text>
       </SwitchActionButton>

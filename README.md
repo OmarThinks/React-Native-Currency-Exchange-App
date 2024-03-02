@@ -56,6 +56,7 @@ This is the frontend for an app that displays currency exchange prices.
 7. TypeScript
 8. Module Resolver
 9. react-i18next
+10. https://github.com/OmarThinks/OmarThinks-React-Native-Template
 
 # E) Limitation:
 
