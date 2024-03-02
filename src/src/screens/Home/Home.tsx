@@ -135,12 +135,6 @@ const Home = () => {
         </SwitchActionButton>
       </View>
 
-      <View className="flex-row self-stretch flex-wrap" style={{gap: 15}}>
-        <Text>{currencyNames.USD}</Text>
-        <Text>{currencyNames.EGP}</Text>
-        <Text>{currencyNames.EUR}</Text>
-      </View>
-
       {fromCurrencyModal}
       {toCurrencyModal}
     </View>
