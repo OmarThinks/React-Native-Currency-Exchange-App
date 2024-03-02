@@ -2,11 +2,28 @@
 
 A project for currency exchange using React Native
 
-# A) About:
+# A) Links:
+
+<table>
+<tr>
+<th>Website</th>
+<th>Link</th>
+</tr>
+<tr>
+<td>Github Repo</td>
+<td><a href="https://github.com/OmarThinks/React-Native-Currency-Exchange-App">https://github.com/OmarThinks/React-Native-Currency-Exchange-App</a></td>
+</tr>
+<tr>
+<td>TouTube</td>
+<td>https</td>
+</tr>
+</table>
+
+# B) About:
 
 This is the frontend for an app that displays currency exchange prices.
 
-# B) Technologies Used:
+# C) Technologies Used:
 
 1. React
 2. React Native CLI
@@ -18,7 +35,7 @@ This is the frontend for an app that displays currency exchange prices.
 8. Module Resolver
 9. react-i18next
 
-# C) Features:
+# D) Features:
 
 ### 1) Selecting currencies:
 
@@ -28,8 +45,9 @@ This is the frontend for an app that displays currency exchange prices.
 
 ### 4) Multi-Languages support:
 
-# D) Limitation:
+# E) Limitation:
 
+The chart is just an empty chart.  
 The main feature of the app is not working, which is rendering the historical data of exchange prices.  
 That's because I couldn't find a free API that gives me historical prices.  
 These examples:
